@@ -1,6 +1,6 @@
 Precourse Exit Practice
 
-Requirements
+**Requirements**
 Pseudocode everything!
 Define your "IOCE"
 Do not alter any provided function definitions
@@ -10,8 +10,12 @@ Feel free to use the console
 
 **Manipulating Collections**
 
-Make 2 functions that randomize the order of an Array's contents.
+- Make 2 functions that randomize the order of an Array's contents.
 Implement one function that is pure, and one that modifies the original array.
+
+- Make a function that accepts an unspecified number of objects and updates the first object with the contents of all subsequent objects.
+
+- Make a function that performs the same operation as the previous function, but does not replace values at keys that are already present.
 
 
 
@@ -23,8 +27,8 @@ Example:
 ```javascript
 
 const obj = {
-  golf: {
-	  zebra: 'charlie'
+    golf: {
+	    zebra: 'charlie'
 	},
 };
 
@@ -33,6 +37,24 @@ replaceValuesInObj(obj, 'charlie', 'delta');
 // returns { golf: { zebra: 'delta' } };
 
 ```
+
+Add a new key/value pair to an Object (and nested Objects).
+
+Example:
+```javascript
+
+const obj = {
+    golf: {
+	    zebra: 'charlie'
+	},
+};
+
+replaceValuesInObj(obj, 'foxtrot', 'victor');
+
+// returns { golf: { zebra: 'charlie', foxtrot: 'victor' }, foxtrot: 'victor' };
+
+```
+
 
 **Executing Higher Order Functions**
 
@@ -46,10 +68,11 @@ Create altered data sets for the following conditions:
 Make new keys (appearanceNumber, name, and seasonsActive)
 The values cannot be directly mapped to new keys.
 Check provided result below for new data examples.
-Implement a solution in two ways:
+Implement each solution in two ways:
 
-Using the native methods of both filter and map
+Chaining native methods or other functions
 Using the native method of reduce
+
 Constraints:
 
 Do not create any unnecessary storage variables outside your Higher Order Functions.
