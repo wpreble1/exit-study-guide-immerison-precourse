@@ -49,7 +49,7 @@ const obj = {
 	},
 };
 
-replaceValuesInObj(obj, 'foxtrot', 'victor');
+addKeysToExistingObj(obj, 'foxtrot', 'victor');
 
 // returns { golf: { zebra: 'charlie', foxtrot: 'victor' }, foxtrot: 'victor' };
 
@@ -65,13 +65,15 @@ Create altered data sets for the following conditions:
 - cast members whose names have more than 10 letters
 
 
-Make new keys (appearanceNumber, name, and seasonsActive)
-The values cannot be directly mapped to new keys.
+Make new keys (appearanceNumber, name, and seasonsActive).
+
+_Note: The values cannot be directly mapped to new keys_
+
 Check provided result below for new data examples.
 Implement each solution in two ways:
 
-Chaining native methods or other functions
-Using the native method of reduce
+- Chaining native methods or other functions
+- Using the native method of reduce
 
 Constraints:
 
