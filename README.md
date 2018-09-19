@@ -3,6 +3,18 @@ Precourse Exit Practice
 **Requirements**
 Pseudocode everything!
 Define your "IOCE"
+
+******************************************************************************************************
+Input: whatever data type your function accepts i.e (array of objects, string, object, array);
+
+Output: data type that should be returned
+
+Constraints: rules that your implementation must follow
+
+Edge cases: special cases that could produce unintended results
+******************************************************************************************************
+
+
 Do not alter any provided function definitions
 Make sure to understand your constraints. A correct answer not following the constraints is wrong. It is better to have attempted the correct problem.
 Feel free to use the console
