@@ -49,6 +49,7 @@ var addKeysToExistingObj = (obj, newKey, newValue) => {
 /////////////////////////////////////////////////////////////////
 // REDUCE VS CHAINED METHODS 
 /////////////////////////////////////////////////////////////////
+
 var comedians = [
     { number: 1, actor: "Eddie Murphy", begin: 1980, end: 1984 },
     { number: 2, actor: "Michael Che", begin: 1984, end: 1986 },
@@ -73,7 +74,6 @@ var comediansPluckedAndFiltered = (comedians) => {
 
 
 
-var comedians
 
 /* Solve by using native method of reduce only */
 var comediansReduced1 = (comedians) => {

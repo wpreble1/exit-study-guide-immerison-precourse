@@ -94,7 +94,7 @@ Your result should look like this:
 ```javascript
 [
   {
-    appearanceNum: '#8',
+    appearanceNumber: '#8',
     name: 'Sterling K. Brown',
     seasonsActive: 6
   },
