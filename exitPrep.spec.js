@@ -55,6 +55,65 @@ describe('2) dirtyShuffle', () => {
 
 });
 
+describe('3) Update object', function() {
+    
+    const input = {
+        banana: 'yellow',
+        apple: 'red',
+        carrot: 'purple', 
+        spinach: 'green',
+    },
+    input2 = {
+        shoe: 'leather',
+        sweater: 'cashmere blend',
+        pants: 'cotton twill',
+        bag: 'canvas',
+        spinach: 'stain',
+    };
+
+    const output = update(input, input2);
+
+    it('should return an object', function (){
+        expect(typeof (update(input, input2))).to.equal('object');
+    });
+
+    it('should return an object with the appropriate key/value pairs', function (){
+        expect(output.hasOwnProperty('pants')).to.equal(true);
+        expect(output.hasOwnProperty('apple')).to.equal(true);
+        expect(output.spinach).to.equal('stain');
+    } )
+});
+
+
+describe('4) Default object values', function() {
+    
+    const input = {
+        banana: 'yellow',
+        apple: 'red',
+        carrot: 'purple', 
+        spinach: 'green',
+    },
+    input2 = {
+        shoe: 'leather',
+        sweater: 'cashmere blend',
+        pants: 'cotton twill',
+        bag: 'canvas',
+        spinach: 'stain',
+    };
+
+    const output = defaults(input, input2);
+
+    it('should return an object', function (){
+        expect(typeof (defaults(input, input2))).to.equal('object');
+    });
+
+    it('should return an object with the appropriate key/value pairs', function (){
+        expect(output.hasOwnProperty('pants')).to.equal(true);
+        expect(output.hasOwnProperty('apple')).to.equal(true);
+        expect(output.spinach).to.equal('green');
+    } )
+});
+
 describe('5) Replace values in object', function () {
 
     var tallyKeys = function (obj) {
@@ -92,7 +151,6 @@ describe('5) Replace values in object', function () {
         };
         const output = replaceValuesInObj(input, 'romeo', 'foxtrot');
 
-        // expect(output.echo).to.equal(undefined);
         expect(output.romeo.xray).to.equal('yankee');
         expect(output.tango.romeo.echo).to.equal('foxtrot');
         expect(output.tango.romeo.foxtrot).to.equal(undefined);
@@ -100,9 +158,6 @@ describe('5) Replace values in object', function () {
         expect(output.yankee).to.equal('foxtrot');
 
         expect(Object.values(output).includes('romeo')).to.equal(false);
-        // expect(output.values.includes('foxtrot')).to.equal(true);
-        // expect(output.values.includes('tango')).to.equal(true);
-        // expect(output.values.includes('yankee')).to.equal(true);
 
         expect(output.tango.hasOwnProperty('romeo')).to.equal(true);
         expect(output.tango.hasOwnProperty('papa')).to.equal(true);
@@ -145,6 +200,75 @@ describe('5) Replace values in object', function () {
     });
 
 });
+
+describe('6) Add keys to existing object', function () {
+
+    it('should return an object', function () {
+        const input = {
+            'echo': { 'xray': 'yankee' },
+            'tango': {
+                'romeo': { 'echo': 'romeo' },
+                'papa': { 'yankee': 'romeo' }
+            },
+            'yankee': 'echo'
+        };
+        expect(typeof (addKeysToExistingObj(input, 'romeo', 'alpha'))).to.equal('object');
+        expect(typeof (addKeysToExistingObj(input, 'echo', 0))).to.equal('object');
+    });
+
+    it('should return object containing new key/value pair', function () {
+        const input = {
+            'romeo': { 'xray': 'yankee' },
+            'tango': {
+                'romeo': { 'echo': 'romeo' },
+                'papa': { 'yankee': 'romeo' }
+            },
+            'yankee': 'romeo'
+        };
+        const output = addKeysToExistingObj(input, 'cheeseburger', 'fries');
+
+        expect(output.romeo.xray).to.equal('yankee');
+        expect(output.romeo.cheeseburger).to.equal('fries');
+        expect(output.tango.romeo.echo).to.equal('romeo');
+        expect(output.tango.romeo.cheeseburger).to.equal('fries');
+        expect(output.tango.romeo.fries).to.equal(undefined);
+        expect(output.tango.papa.yankee).to.equal('romeo');
+        expect(output.tango.papa.cheeseburger).to.equal('fries');
+        expect(output.yankee).to.equal('romeo');
+        expect(output.cheeseburger).to.equal('fries');
+
+        expect(Object.values(output).includes('fries')).to.equal(true);
+        expect(Object.keys(output).includes('cheeseburger')).to.equal(true);
+
+        expect(output.tango.hasOwnProperty('romeo')).to.equal(true);
+        expect(output.tango.hasOwnProperty('papa')).to.equal(true);
+
+        expect(output.tango.romeo.hasOwnProperty('echo')).to.equal(true);
+        expect(output.tango.romeo.hasOwnProperty('foxtrot')).to.equal(false);
+        expect(output.tango.papa.hasOwnProperty('yankee')).to.equal(true);
+    });
+
+
+    it('should use recursion by calling self', function () {
+        const input = {
+            'echo': { 'xray': 'yankee' },
+            'tango': {
+                'romeo': { 'echo': 'romeo' },
+                'papa': { 'yankee': 'romeo' }
+            },
+            'yankee': 'echo'
+        };
+        const originalAddKeysToExistingObj = addKeysToExistingObj;
+        addKeysToExistingObj = sinon.spy(addKeysToExistingObj);
+        addKeysToExistingObj(input, 'romeo', 'alpha');
+        expect(addKeysToExistingObj.callCount).to.be.above(1);
+        addKeysToExistingObj = originalAddKeysToExistingObj;
+    });
+
+});
+
+
+
 
 describe('7) comediansFilteredAndMapped()', () => {
     const tComedians = [
@@ -344,21 +468,21 @@ describe('10) comediansReduced2()', () => {
     after(() => Array.prototype.reduce.restore());
 
     it('should exist', () => {
-        comediansReduced1.should.be.an.instanceOf(Function);
+        comediansReduced2.should.be.an.instanceOf(Function);
         should.exist(comedians);
     });
 
     it('should use the native .reduce()', () => {
-        comediansReduced1(tComedians);
+        comediansReduced2(tComedians);
         Array.prototype.reduce.called.should.be.true;
     });
 
     it('should return an array', function () {
-        comediansReduced1(tComedians).should.be.an('array');
+        comediansReduced2(tComedians).should.be.an('array');
     });
 
     it('should return the proper array', function () {
-        comediansReduced1(tComedians).should.eql(tResult);
+        comediansReduced2(tComedians).should.eql(tResult);
     });
 
 });
