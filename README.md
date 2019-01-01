@@ -74,7 +74,7 @@ You are provided an Array of Objects representing SNL cast members.
 
 Create altered data sets for the following conditions:
 - cast members added from the year 2005 to present
-- cast members whose names have more than 12 letters
+- cast members whose names have more than 10 letters.
 
 
 Make new keys (appearanceNumber, name, and seasonsActive).
