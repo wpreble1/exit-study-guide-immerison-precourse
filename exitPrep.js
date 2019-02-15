@@ -1,12 +1,11 @@
-// Your mission should you choose to accept it is to complete the following exercises. 
-// If you choose to do so, you may that you are ready to crush it on the precourse exit.
+// Your mission should you choose to accept it is to complete the following functions. 
+// If you choose to do so, you may find that you are ready to crush it on the precourse exit.
 
 // Remember your training:
     // Be sure you understand the instructions.
     // Pseudocode your logic.
     // Breathe.
     // You can do this.
-
 
 
 /////////////////////////////////////////////////////////
