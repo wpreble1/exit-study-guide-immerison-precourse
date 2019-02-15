@@ -15,9 +15,11 @@ Edge cases: special cases that could produce unintended results
 ******************************************************************************************************
 
 
-Do not alter any provided function definitions
-Make sure to understand your constraints. A correct answer not following the constraints is wrong. It is better to have attempted the correct problem.
-Feel free to use the console
+Make all of your changes in ```exitPrep.js```. 
+Make sure to understand your constraints. 
+A correct answer not following the constraints is wrong. 
+It is better to have attempted the correct problem.
+Feel free to use the console and the debugger.
 
 
 **Manipulating Collections**
