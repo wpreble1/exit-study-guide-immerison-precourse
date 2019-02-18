@@ -21,13 +21,13 @@ const dirtyShuffle = array => {
     // your code here
 };
 
-const update = obj => { 
+const mergeObjects = obj => {
     // your code here
 };
 
-const defaults = obj => {
+const semiMergeObjects = obj => {
 
-}; 
+};
 
 
 
@@ -46,7 +46,7 @@ var addKeysToExistingObj = (obj, newKey, newValue) => {
 
 
 /////////////////////////////////////////////////////////////////
-// REDUCE VS CHAINED METHODS 
+// REDUCE VS CHAINED METHODS
 /////////////////////////////////////////////////////////////////
 
 var comedians = [
@@ -65,10 +65,12 @@ var comedians = [
 /* Solve by chaining native methods of map and filter only */
 var comediansFilteredAndMapped = (comedians) => {
     // Your code here
+
 };
 
-var comediansPluckedAndFiltered = (comedians) => {
+var comedianNamesFilteredAndMapped = (comedians) => {
     // Your code here
+
 };
 
 
@@ -77,10 +79,12 @@ var comediansPluckedAndFiltered = (comedians) => {
 /* Solve by using native method of reduce only */
 var comediansReduced1 = (comedians) => {
     // Your code here
+
 };
 
 var comediansReduced2 = (comedians) => {
     // Your code here
+
 };
 
 

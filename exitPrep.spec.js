@@ -55,12 +55,11 @@ describe('2) dirtyShuffle', () => {
 
 });
 
-describe('3) Update object', function() {
-    
+describe('3) mergeObjects', function() {
     const input = {
         banana: 'yellow',
         apple: 'red',
-        carrot: 'purple', 
+        carrot: 'purple',
         spinach: 'green',
     },
     input2 = {
@@ -71,26 +70,25 @@ describe('3) Update object', function() {
         spinach: 'stain',
     };
 
-    const output = update(input, input2);
+    const output = mergeObjects(input, input2);
 
-    it('should return an object', function (){
-        expect(typeof (update(input, input2))).to.equal('object');
+    it('should return an object', function() {
+        expect(typeof (mergeObjects(input, input2))).to.equal('object');
     });
 
     it('should return an object with the appropriate key/value pairs', function (){
         expect(output.hasOwnProperty('pants')).to.equal(true);
         expect(output.hasOwnProperty('apple')).to.equal(true);
         expect(output.spinach).to.equal('stain');
-    } )
+    });
 });
 
 
-describe('4) Default object values', function() {
-    
+describe('4) semiMergeObjects', function() {
     const input = {
         banana: 'yellow',
         apple: 'red',
-        carrot: 'purple', 
+        carrot: 'purple',
         spinach: 'green',
     },
     input2 = {
@@ -101,10 +99,10 @@ describe('4) Default object values', function() {
         spinach: 'stain',
     };
 
-    const output = defaults(input, input2);
+    const output = semiMergeObjects(input, input2);
 
     it('should return an object', function (){
-        expect(typeof (defaults(input, input2))).to.equal('object');
+        expect(typeof (semiMergeObjects(input, input2))).to.equal('object');
     });
 
     it('should return an object with the appropriate key/value pairs', function (){
@@ -114,7 +112,7 @@ describe('4) Default object values', function() {
     } )
 });
 
-describe('5) Replace values in object', function () {
+describe('5) replaceValuesInObj', function () {
 
     var tallyKeys = function (obj) {
         let count = 0;
@@ -201,7 +199,7 @@ describe('5) Replace values in object', function () {
 
 });
 
-describe('6) Add keys to existing object', function () {
+describe('6) addKeysToExistingObj', function () {
 
     it('should return an object', function () {
         const input = {
@@ -331,12 +329,13 @@ describe('7) comediansFilteredAndMapped()', () => {
     it('should return an array', () =>
         comediansFilteredAndMapped(tComedians).should.be.an('array'));
 
-    it('should return the proper array', () =>
-        comediansFilteredAndMapped(tComedians).should.eql(tResult));
+    it('should return the proper array', () => {
+        comediansFilteredAndMapped(tComedians).should.eql(tResult);
+    });
 
 });
 
-describe('8) comediansPluckedAndFiltered()', () => {
+describe('8) comedianNamesFilteredAndMapped()', () => {
     const tComedians = [
         { number: 1, actor: "Eddie Murphy", begin: 1980, end: 1984 },
         { number: 2, actor: "Michael Che", begin: 1984, end: 1986 },
@@ -350,39 +349,36 @@ describe('8) comediansPluckedAndFiltered()', () => {
         { number: 10, actor: "Leslie Jones", begin: 2014, end: 2018 },
     ];
 
-    const tResult = ['Kenan Thompson', 'Sterling K. Brown'];
+    const tResult = ['Sterling K. Brown', 'Jay Pharoah', 'Leslie Jones'];
 
     before(function () {
         sinon.spy(Array.prototype, 'filter');
-        sinon.spy(window, 'pluck');
     });
 
     afterEach(function () {
         Array.prototype.filter.reset();
-        window.pluck.reset();
     });
 
     after(function () {
         Array.prototype.filter.restore();
-        window.pluck.restore();
     });
 
     it('should exist', () => {
-        comediansPluckedAndFiltered.should.be.an.instanceOf(Function);
+        comedianNamesFilteredAndMapped.should.be.an.instanceOf(Function);
         should.exist(comedians);
     });
 
     it('should use the native filter', function () {
-        comediansPluckedAndFiltered(tComedians);
+        comedianNamesFilteredAndMapped(tComedians);
         Array.prototype.filter.called.should.be.true;
-        window.pluck.called.should.be.true;
     });
 
     it('should return an array', () =>
-        comediansPluckedAndFiltered(tComedians).should.be.an('array'));
+        comedianNamesFilteredAndMapped(tComedians).should.be.an('array'));
 
-    it('should return the proper array', () =>
-        comediansPluckedAndFiltered(tComedians).should.eql(tResult));
+    it('should return the proper array', () => {
+        comedianNamesFilteredAndMapped(tComedians).should.eql(tResult);
+    });
 
 });
 
@@ -417,7 +413,6 @@ describe('9) comediansReduced1()', () => {
             seasonsActive: 5
         }
     ];
-    
 
     before(() => sinon.spy(Array.prototype, 'reduce'));
 
@@ -459,7 +454,7 @@ describe('10) comediansReduced2()', () => {
         { number: 10, actor: "Leslie Jones", begin: 2014, end: 2018 },
     ];
 
-    const tResult = ['Kenan Thompson', 'Sterling K. Brown'];
+    const tResult = ['Sterling K. Brown', 'Jay Pharoah', 'Leslie Jones'];
 
     before(() => sinon.spy(Array.prototype, 'reduce'));
 
