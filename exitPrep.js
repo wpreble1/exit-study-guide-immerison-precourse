@@ -17,16 +17,12 @@ const pureShuffle = array => {
     // your code here
 };
 
-const dirtyShuffle = array => {
+var isPalindrome = (string) => {
     // your code here
-};
+}
 
 const mergeObjects = obj => {
     // your code here
-};
-
-const semiMergeObjects = obj => {
-
 };
 
 
@@ -35,14 +31,14 @@ const semiMergeObjects = obj => {
 // USING RECURSION
 //////////////////////////////////////////////////////
 
-var replaceValuesInObj = (obj, value, newValue) => {
+
+var addKeysToExistingObj = (obj, newKey, newValue) => {
     // your code here
 };
 
-var addKeysToExistingObj = (obj, newKey, newValue) => {
-
-};
-
+var map = (arr, func) => {
+    // your code here
+}
 
 
 /////////////////////////////////////////////////////////////////
