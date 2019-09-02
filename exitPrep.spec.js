@@ -85,8 +85,96 @@ describe('3) mergeObjects', function() {
     });
 });
 
+describe('4) replaceValuesInObj', function () {
 
-describe('4) addKeysToExistingObj', function () {
+    var tallyKeys = function (obj) {
+        let count = 0;
+        for (const k in obj) {
+            if (typeof obj[k] === 'object') {
+                count += tallyKeys(obj[k]);
+            }
+            count++;
+        }
+        return count;
+    };
+
+    it('should return an object', function () {
+        const input = {
+            'echo': { 'xray': 'yankee' },
+            'tango': {
+                'romeo': { 'echo': 'romeo' },
+                'papa': { 'yankee': 'romeo' }
+            },
+            'yankee': 'echo'
+        };
+        expect(typeof (replaceValuesInObj(input, 'romeo', 'alpha'))).to.equal('object');
+        expect(typeof (replaceValuesInObj(input, 'echo', 0))).to.equal('object');
+    });
+
+    it('should return object containing replaced values', function () {
+        const input = {
+            'romeo': { 'xray': 'yankee' },
+            'tango': {
+                'romeo': { 'echo': 'romeo' },
+                'papa': { 'yankee': 'romeo' }
+            },
+            'yankee': 'romeo'
+        };
+        const output = replaceValuesInObj(input, 'romeo', 'foxtrot');
+
+        expect(output.romeo.xray).to.equal('yankee');
+        expect(output.tango.romeo.echo).to.equal('foxtrot');
+        expect(output.tango.romeo.foxtrot).to.equal(undefined);
+        expect(output.tango.papa.yankee).to.equal('foxtrot');
+        expect(output.yankee).to.equal('foxtrot');
+
+        expect(Object.values(output).includes('romeo')).to.equal(false);
+
+        expect(output.tango.hasOwnProperty('romeo')).to.equal(true);
+        expect(output.tango.hasOwnProperty('papa')).to.equal(true);
+
+        expect(output.tango.romeo.hasOwnProperty('echo')).to.equal(true);
+        expect(output.tango.romeo.hasOwnProperty('foxtrot')).to.equal(false);
+        expect(output.tango.papa.hasOwnProperty('yankee')).to.equal(true);
+    });
+
+    it('should return object with same number of keys', function () {
+        const input = {
+            'echo': { 'xray': 'yankee' },
+            'tango': {
+                'romeo': { 'echo': 'romeo' },
+                'papa': { 'yankee': 'romeo' }
+            },
+            'yankee': 'echo'
+        };
+        const output1 = replaceValuesInObj(input, 'romeo', 'foxtrot');
+        const output2 = replaceValuesInObj(output1, 'romeo', 'foxtrot');
+        expect(tallyKeys(input)).to.equal(8);
+        expect(tallyKeys(output1)).to.equal(8);
+        expect(tallyKeys(output2)).to.equal(8);
+    });
+
+    it('should use recursion by calling self', function () {
+        const input = {
+            'echo': { 'xray': 'yankee' },
+            'tango': {
+                'romeo': { 'echo': 'romeo' },
+                'papa': { 'yankee': 'romeo' }
+            },
+            'yankee': 'echo'
+        };
+        const originalReplaceValuesInObj = replaceValuesInObj;
+        replaceValuesInObj = sinon.spy(replaceValuesInObj);
+        replaceValuesInObj(input, 'romeo', 'alpha');
+        expect(replaceValuesInObj.callCount).to.be.above(1);
+        replaceValuesInObj = originalReplaceValuesInObj;
+    });
+
+});
+
+
+
+describe('5) addKeysToExistingObj', function () {
 
     it('should return an object', function () {
         const input = {
@@ -152,7 +240,7 @@ describe('4) addKeysToExistingObj', function () {
 
 });
 
-describe('5) map', () => {
+describe('6) map', () => {
     
 
     it('should use recursion by calling self', function () {
@@ -204,7 +292,7 @@ describe('5) map', () => {
 
 
 
-describe('6) comediansFilteredAndMapped()', () => {
+describe('7) comediansFilteredAndMapped()', () => {
     const tComedians = [
         { number: 1, actor: "Eddie Murphy", begin: 1980, end: 1984 },
         { number: 2, actor: "Michael Che", begin: 1984, end: 1986 },
@@ -271,7 +359,7 @@ describe('6) comediansFilteredAndMapped()', () => {
 
 });
 
-describe('7) comedianNamesFilteredAndMapped()', () => {
+describe('8) comedianNamesFilteredAndMapped()', () => {
     const tComedians = [
         { number: 1, actor: "Eddie Murphy", begin: 1980, end: 1984 },
         { number: 2, actor: "Michael Che", begin: 1984, end: 1986 },
@@ -318,7 +406,7 @@ describe('7) comedianNamesFilteredAndMapped()', () => {
 
 });
 
-describe('8) comediansReduced1()', () => {
+describe('9) comediansReduced1()', () => {
     const tComedians = [
         { number: 1, actor: "Eddie Murphy", begin: 1980, end: 1984 },
         { number: 2, actor: "Michael Che", begin: 1984, end: 1986 },
@@ -376,7 +464,7 @@ describe('8) comediansReduced1()', () => {
 
 });
 
-describe('9) comediansReduced2()', () => {
+describe('10) comediansReduced2()', () => {
     const tComedians = [
         { number: 1, actor: "Eddie Murphy", begin: 1980, end: 1984 },
         { number: 2, actor: "Michael Che", begin: 1984, end: 1986 },

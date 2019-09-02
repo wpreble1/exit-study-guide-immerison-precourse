@@ -31,6 +31,9 @@ const mergeObjects = obj => {
 // USING RECURSION
 //////////////////////////////////////////////////////
 
+var replaceValuesInObj = (obj, value, newValue) => {
+    // your code here
+};
 
 var addKeysToExistingObj = (obj, newKey, newValue) => {
     // your code here
