@@ -15,14 +15,33 @@
 
 const pureShuffle = array => {
     // your code here
+    const shadowCopy = array.slice();
+    const shuffleArray = [];
+
+    while (shadowCopy.length) {
+        const randomIndex = Math.floor(Math.random() * shadowCopy.length);
+        shuffleArray.push(shadowCopy[randomIndex]);
+        shadowCopy.splice(randomIndex, 1);
+    }
+    return shuffleArray;
 };
 
 var isPalindrome = (string) => {
     // your code here
+    if (string === '') return undefined;
+    if (string.length <= 1) return true;
+    if (string[0].toLowerCase() === string[string.length - 1].toLowerCase()) {
+        return isPalindrome(string.slice(1, string.length - 1));
+    } else {
+        return false;
+    }
 }
 
 const mergeObjects = obj => {
     // your code here
+    // return Object.assign(obj, ...arguments);
+
+
 };
 
 
